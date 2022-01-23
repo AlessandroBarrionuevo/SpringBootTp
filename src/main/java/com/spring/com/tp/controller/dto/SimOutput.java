@@ -1,16 +1,18 @@
-package com.spring.com.tp.model;
+package com.spring.com.tp.controller.dto;
+
+import com.spring.com.tp.model.Book;
+import com.spring.com.tp.model.Movie;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.util.List;
 
 @Getter
 @Setter
 @AllArgsConstructor
-public class Person {
+public class SimOutput {
     private String name;
-    private String dni;
-    private String bDay;
-    private List<Movie> myMovies;
+    private List<Movie> movies;
     private Book book;
 }
