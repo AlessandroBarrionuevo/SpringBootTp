@@ -26,14 +26,14 @@ public class SimService {
 
     public Sim createPerson(SimInput simInput){
         log.info("Sim to create: {}", simInput);
-        Book personBook = this.bookService.getBook(simInput.getIsbn());
-        List<Movie> personMovies = this.movieService.getMovies(simInput.getMoviesName());
+        Book simBook = this.bookService.createBook(simInput.getIsbn());
+        List<Movie> simMovies = this.movieService.createMovieList(simInput.getMoviesName());
         Sim sim = new Sim(
                 simInput.getName(),
                 simInput.getDni(),
                 simInput.getBDay(),
-                personMovies,
-                personBook
+                simMovies,
+                simBook
         );
         log.info("Sim created: {}", sim);
         return sim;

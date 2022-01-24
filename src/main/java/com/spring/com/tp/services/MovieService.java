@@ -22,7 +22,7 @@ public class MovieService {
     }
 
 
-    public Movie getMovie(String movieName){
+    public Movie createMovie(String movieName){
         log.info("movieName: {}", movieName);
         MovieResponse movieResponse = this.movieClient.getMovie(movieName);
         Result results = movieResponse.getResults().get(0);
@@ -38,7 +38,7 @@ public class MovieService {
         return movie;
     }
 
-    public List<Movie> getMovies(List<String> movieNames){
+    public List<Movie> createMovieList(List<String> movieNames){
         log.info("list Of movies names: {}", movieNames);
         //creo el array que va a devolverse con los datos que busquemos en el get
         List<Movie> myMovies = new ArrayList<Movie>();
@@ -47,7 +47,7 @@ public class MovieService {
 
         movieNames.stream().forEach((m) -> {
             //vamos a buscar los datos con ese nombre y los colocamos en la que queremos retornar
-            myMovies.add(getMovie(m));
+            myMovies.add(createMovie(m));
         });
         //con filter, igual estamal hay que hacerlo en un paso previo para poder filtrar bien
         //List<Movie> filterMovies = myMovies.stream().filter((movie) -> Objects.equals(movie.getTitleType(), "tvSeries")).collect(Collectors.toList());
