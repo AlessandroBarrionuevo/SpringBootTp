@@ -21,7 +21,6 @@ public class MovieClient {
 
     @Value("${movie.Api}")
     private String url ;
-    //= "https://imdb8.p.rapidapi.com/title/find?q=";
 
     @Autowired
     public MovieClient(RestTemplate restTemplate){
