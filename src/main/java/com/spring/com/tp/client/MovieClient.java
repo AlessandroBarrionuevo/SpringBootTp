@@ -28,7 +28,7 @@ public class MovieClient {
     }
 
     public MovieResponse getMovie(String movieName){
-        log.info("Get from: {}", this.url);
+        log.info("Get from: {}. Movie name: {}", this.url, movieName);
         HttpHeaders header = new HttpHeaders();
         header.set("x-rapidapi-host", "imdb8.p.rapidapi.com");
         header.set("x-rapidapi-key", "c42b9c3cbfmsh58412fc2b88e92bp12b98bjsna78136cbbfa2");
