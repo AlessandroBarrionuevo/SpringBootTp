@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
-public class PersonController {
+public class SimController {
     private SimService simService;
 
     @Autowired
-    public PersonController(SimService simService){
+    public SimController(SimService simService){
       this.simService = simService;
     }
 
