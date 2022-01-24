@@ -34,7 +34,7 @@ public class MovieClient {
         header.set("x-rapidapi-key", "c42b9c3cbfmsh58412fc2b88e92bp12b98bjsna78136cbbfa2");
         HttpEntity<Void> requestEntity = new HttpEntity<Void>(header);
         ResponseEntity<MovieResponse> response = restTemplate.exchange(this.url+movieName , HttpMethod.GET, requestEntity, MovieResponse.class);
-        log.info("Api response: {}", response.getBody());
+        log.info("Api Movie Client Response: {}", response.getBody());
         return response.getBody();
     }
 
