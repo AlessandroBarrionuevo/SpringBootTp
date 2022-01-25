@@ -19,14 +19,12 @@ public class SimController {
       this.simService = simService;
     }
 
-    //reglas de rest ponerlo en plural
     @PostMapping(path = "/sims")
         public ResponseEntity<SimOutput> createPerson(@RequestBody SimInput simInput){
-        log.info("Estamos en el metodo post que fue solicitado desde un microservicio exterior o una peticion directa a /sims post method");
-        log.info("recibimos un json con los datos a utilizar para crear una persona mediante el service PersonService.");
-        Sim sim = this.simService.createPerson(simInput);
+        log.info("PostMethod recive SimInput: {} ", simInput);
+        Sim sim = this.simService.createSim(simInput);
         SimOutput simOutput = new SimOutput(sim.getName(),sim.getMovies(), sim.getBook());
-        log.info("La persona se creo y se va a dar como respuesta los datos de la persona, datos de la lista de peliculas y del libro relacionado con el isbn enviado");
+        log.info("Created Sim: {}", simOutput);
         return ResponseEntity.ok(simOutput);
     }
 

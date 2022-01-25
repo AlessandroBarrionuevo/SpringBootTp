@@ -24,7 +24,7 @@ public class MovieService {
 
 
     public Movie createMovie(String movieName){
-        log.info("movieName: {}", movieName);
+        log.info("Creating movie with name: {}", movieName);
         MovieResponse movieResponse = this.movieClient.getMovie(movieName);
         Result results = movieResponse.getResults().get(0);
         Movie movie = new Movie(
@@ -41,17 +41,13 @@ public class MovieService {
 
     public List<Movie> createMovieList(List<String> movieNames){
         log.info("list Of movies names: {}", movieNames);
-        //creo el array que va a devolverse con los datos que busquemos en el get
-        List<Movie> myMovies = new ArrayList<Movie>();
 
-        //por cada uno de los elementos de la lista que nos viene por parametro
+        List<Movie> myMovies = new ArrayList<Movie>();
         myMovies = movieNames.stream().map(
                 (movie) -> this.createMovie(movie)
         ).collect(Collectors.toList());
 
-
-
-        log.info("Movies: {}", myMovies);
+        log.info("Created Movies: {}", myMovies);
         return myMovies;
     }
 

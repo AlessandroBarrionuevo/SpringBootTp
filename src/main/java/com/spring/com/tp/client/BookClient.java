@@ -22,7 +22,6 @@ public class    BookClient {
 
     public BookResponse getBookFromGoogleApi(String isbn){
         log.info("Get to Api Book: {}, buscando el isbn: {}", url, isbn);
-        String urlAPegar = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
-        return this.restTemplate.getForObject(urlAPegar, BookResponse.class);
+        return this.restTemplate.getForObject(this.url + isbn, BookResponse.class);
     }
 }

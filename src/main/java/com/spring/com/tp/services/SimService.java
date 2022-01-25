@@ -24,7 +24,7 @@ public class SimService {
         this.movieService = movieService;
     }
 
-    public Sim createPerson(SimInput simInput){
+    public Sim createSim(SimInput simInput){
         log.info("Sim to create: {}", simInput);
         Book simBook = this.bookService.createBook(simInput.getIsbn());
         List<Movie> simMovies = this.movieService.createMovieList(simInput.getMoviesName());
@@ -35,7 +35,7 @@ public class SimService {
                 simMovies,
                 simBook
         );
-        log.info("Sim created: {}", sim);
+        log.info("Created Sim: {}", sim);
         return sim;
     }
 

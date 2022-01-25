@@ -19,7 +19,7 @@ public class BookService {
     }
 
     public Book createBook(String isbn){
-        log.info("isbn: {}", isbn);
+        log.info("Creating book from isbn: {}", isbn);
         BookResponse bookResponse = this.bookClient.getBookFromGoogleApi(isbn);
         VolumeInfo volumeInfo = bookResponse.getItems().get(0).getVolumeInfo();
         Book book = new Book(
