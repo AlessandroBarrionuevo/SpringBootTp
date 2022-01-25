@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -44,13 +45,12 @@ public class MovieService {
         List<Movie> myMovies = new ArrayList<Movie>();
 
         //por cada uno de los elementos de la lista que nos viene por parametro
+        myMovies = movieNames.stream().map(
+                (movie) -> this.createMovie(movie)
+        ).collect(Collectors.toList());
 
-        movieNames.stream().forEach((m) -> {
-            //vamos a buscar los datos con ese nombre y los colocamos en la que queremos retornar
-            myMovies.add(createMovie(m));
-        });
-        //con filter, igual estamal hay que hacerlo en un paso previo para poder filtrar bien
-        //List<Movie> filterMovies = myMovies.stream().filter((movie) -> Objects.equals(movie.getTitleType(), "tvSeries")).collect(Collectors.toList());
+
+
         log.info("Movies: {}", myMovies);
         return myMovies;
     }
