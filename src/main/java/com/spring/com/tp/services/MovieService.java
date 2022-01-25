@@ -42,11 +42,7 @@ public class MovieService {
     public List<Movie> createMovieList(List<String> movieNames){
         log.info("list Of movies names: {}", movieNames);
 
-        List<Movie> myMovies = new ArrayList<Movie>();
-        myMovies = movieNames.stream().map(
-                (movie) -> this.createMovie(movie)
-        ).collect(Collectors.toList());
-
+        List<Movie> myMovies =  movieNames.stream().map((movie) -> this.createMovie(movie)).collect(Collectors.toList());
         log.info("Created Movies: {}", myMovies);
         return myMovies;
     }
