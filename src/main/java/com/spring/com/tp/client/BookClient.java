@@ -5,6 +5,7 @@ import com.spring.com.tp.client.dtoBook.BookResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,7 +23,8 @@ public class    BookClient {
 
     public BookResponse getBookFromGoogleApi(String isbn){
         log.info("Get to Api Book: {}, buscando el isbn: {}", url, isbn);
-        log.info("Response from Api: {} with isbn: {}", this.restTemplate.getForObject(this.url + isbn, BookResponse.class), isbn);
-        return this.restTemplate.getForObject(this.url + isbn, BookResponse.class);
+        BookResponse bookResponse =  this.restTemplate.getForObject(this.url + isbn, BookResponse.class);
+        log.info("Response from Api: {} with isbn: {}", bookResponse);
+        return bookResponse;
     }
 }
