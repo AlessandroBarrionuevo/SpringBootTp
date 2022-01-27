@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
 @Service
@@ -41,10 +42,13 @@ public class SimService {
     }
 
     public Sim getSimById(String id){
+        log.info("Request to get sim with id: {}", id);
         Sim sim = this.simRepo.getSimById(id);
         if ( sim == null){
+            log.info("Service response for get sim: null");
             return null;
         } else {
+            log.info("Service response for get sim: {}}", sim);
             return sim;
         }
     }
@@ -52,30 +56,42 @@ public class SimService {
     public List<Sim> getAllSims(){
         List<Sim> listOfSims = this.simRepo.getAllSims();
         if(listOfSims.isEmpty()){
+            log.info("Service response for all sims: null, does not exist sims");
             return null;
         }else{
+            log.info("Service response for get all sims: {}", listOfSims);
             return listOfSims;
         }
     }
 
-    public Sim updateSim(Sim sim){
-        //obtengo el sim que actualizo
-        Sim updateSim = simRepo.updateSim(sim);
 
-        //chequeo que lo devuelto sea un sim y no uun null producto de que no existia ese Sim en memoria
-        if ( updateSim != null){
-            return  updateSim;
+    public Sim updateSim(Sim sim){
+        //Al ser un put significa que voy a actulizar un Sim que ya tenia en memoria
+        //Obtengo el sim anterior utilizando el mismo id que me pasan, esto es para verificar que ya existiera en memoria
+        Sim simOldValue = this.simRepo.getSimById(sim.getDni());
+
+        //verifico si son iguales los id
+        if (Objects.equals(sim.getDni(), simOldValue.getDni())){
+            log.info("Existing Sim: {}", simOldValue);
+            //si coinciden es que existe ese sim, por ende lo actualizo
+            simRepo.updateSim(sim, simOldValue);
+            log.info("Sim updated: {}", sim);
+            return sim;
         }else{
+            //si no existe regreso un null a falta de tener excepciones implementadas
+            log.info("Sim update null, not exist sim in bdd");
             return null;
         }
     }
-
     public String deleteSimById(String id){
+        log.info("Delete sim with id: {}", id);
         Sim simToDelete = this.getSimById(id);
         if (simToDelete != null){
             simRepo.deleteById(simToDelete);
+            log.info("successfully removed");
             return "Sim eliminado con exito";
         }else{
+            log.info("Error. can't remove sim");
             return "Error no se pudo eliminar el sim";
         }
 

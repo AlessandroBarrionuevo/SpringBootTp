@@ -31,23 +31,31 @@ public class SimController {
 
     @GetMapping(path = "/sims/{id}")
     public ResponseEntity<Sim> getSim(@PathVariable String id){
+        log.info("Get method recive petition for Sim whith ID: {}", id);
         Sim sim = this.simService.getSimById(id);
+        log.info("Giving back Sim: {}", sim);
         return ResponseEntity.ok(sim);
     }
 
     @GetMapping(path = "/sims")
     public ResponseEntity<List<Sim>> getAllSims(){
-        return ResponseEntity.ok(this.simService.getAllSims());
+        log.info("Petition for all sims");
+        List<Sim> sims = this.simService.getAllSims();
+        log.info("Giving back list of sims: {}", sims);
+        return ResponseEntity.ok(sims);
     }
 
     @PutMapping(path = "/sims")
     public ResponseEntity<Sim> putSim(@RequestBody Sim sim){
+        log.info("Updating sim: {}", sim);
         return ResponseEntity.ok( this.simService.updateSim(sim));
     }
 
     @DeleteMapping(path = "/sims/{id}")
     public ResponseEntity<String> deleteSim(@PathVariable String id){
+        log.info("Deleting sim whit id: {}", id);
         String deleteMsj = this.simService.deleteSimById(id);
+        log.info("Request response: {}", deleteMsj);
         return ResponseEntity.ok(deleteMsj);
     }
 
