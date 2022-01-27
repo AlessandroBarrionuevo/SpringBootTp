@@ -35,9 +35,53 @@ public class SimService {
                 simMovies,
                 simBook
         );
+        simRepo.insertSim(sim);
         log.info("Created Sim: {}", sim);
         return sim;
     }
+
+    public Sim getSimById(String id){
+        Sim sim = this.simRepo.getSimById(id);
+        if ( sim == null){
+            return null;
+        } else {
+            return sim;
+        }
+    }
+
+    public List<Sim> getAllSims(){
+        List<Sim> listOfSims = this.simRepo.getAllSims();
+        if(listOfSims.isEmpty()){
+            return null;
+        }else{
+            return listOfSims;
+        }
+    }
+
+    public Sim updateSim(Sim sim){
+        //obtengo el sim que actualizo
+        Sim updateSim = simRepo.updateSim(sim);
+
+        //chequeo que lo devuelto sea un sim y no uun null producto de que no existia ese Sim en memoria
+        if ( updateSim != null){
+            return  updateSim;
+        }else{
+            return null;
+        }
+    }
+
+    public String deleteSimById(String id){
+        Sim simToDelete = this.getSimById(id);
+        if (simToDelete != null){
+            simRepo.deleteById(simToDelete);
+            return "Sim eliminado con exito";
+        }else{
+            return "Error no se pudo eliminar el sim";
+        }
+
+    }
+
+
 
 
 
