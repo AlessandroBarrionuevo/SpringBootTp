@@ -1,4 +1,6 @@
 package com.spring.com.tp.services;
+import com.spring.com.tp.config.exception.BadRequestException;
+import com.spring.com.tp.config.exception.NotFoundException;
 import com.spring.com.tp.controller.dto.SimInput;
 import com.spring.com.tp.model.Book;
 import com.spring.com.tp.model.Movie;
@@ -46,9 +48,9 @@ public class SimService {
         Sim sim = this.simRepo.getSimById(id);
         if ( sim == null){
             log.info("Service response for get sim: null");
-            return null;
+            throw new NotFoundException("Sim not fund");
         } else {
-            log.info("Service response for get sim: {}}", sim);
+            log.info("Service response for get sim: {}", sim);
             return sim;
         }
     }
@@ -56,8 +58,8 @@ public class SimService {
     public List<Sim> getAllSims(){
         List<Sim> listOfSims = this.simRepo.getAllSims();
         if(listOfSims.isEmpty()){
-            log.info("Service response for all sims: null, does not exist sims");
-            return null;
+            log.info("Service response for all sims: NotFundException, does not exist sims");
+            throw new NotFoundException("Sims are empty");
         }else{
             log.info("Service response for get all sims: {}", listOfSims);
             return listOfSims;
@@ -80,7 +82,7 @@ public class SimService {
         }else{
             //si no existe regreso un null a falta de tener excepciones implementadas
             log.info("Sim update null, not exist sim in bdd");
-            return null;
+            throw new NotFoundException("Sim doesn't exist");
         }
     }
     public String deleteSimById(String id){
@@ -92,7 +94,7 @@ public class SimService {
             return "Sim eliminado con exito";
         }else{
             log.info("Error. can't remove sim");
-            return "Error no se pudo eliminar el sim";
+            throw new BadRequestException("Error can't remove sim whit id: " + id);
         }
 
     }
