@@ -19,7 +19,7 @@ public class SimRepo {
 
     public void  insertSim(Sim sim){
         log.info("Saving sim: {}", sim);
-        simMap.put(sim.getDni(),sim);
+        simMap.put(sim.getDni(), sim);
         log.info("Sim saved with succesfull");
     }
 

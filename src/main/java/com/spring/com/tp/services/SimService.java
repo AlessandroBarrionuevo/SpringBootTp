@@ -10,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,14 +37,16 @@ public class SimService {
         Sim sim = new Sim(
                 simInput.getName(),
                 simInput.getDni(),
-                simInput.getBDay(),
+                this.formaterDate(simInput.getBirthDay()),
                 simMovies,
                 simBook
         );
         simRepo.insertSim(sim);
         log.info("Created Sim: {}", sim);
+        log.info("Sim BDAY: {}", simInput.getBirthDay());
         return sim;
     }
+
 
     public Sim getSimById(String id){
         log.info("Request to get sim with id: {}", id);
@@ -97,6 +102,17 @@ public class SimService {
             throw new BadRequestException("Error can't remove sim whit id: " + id);
         }
 
+    }
+
+    public LocalDate formaterDate(String birthDay){
+        log.info("transforming date format: {}", birthDay);
+        DateTimeFormatter esDateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        if (birthDay.contains("-")){
+             esDateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        }
+        LocalDate simBday = LocalDate.parse(birthDay, esDateFormat);
+        log.info("Date format transformated: {}", simBday);
+        return simBday;
     }
 
 
