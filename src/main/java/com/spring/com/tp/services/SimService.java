@@ -47,7 +47,7 @@ public class SimService {
         log.info("Request to get sim with id: {}", id);
         Sim sim = this.simRepo.getSimById(id);
         if ( sim == null){
-            log.info("Service response for get sim: null");
+            log.info("Service response for get sim: Sim not Found");
             throw new NotFoundException("Sim not fund");
         } else {
             log.info("Service response for get sim: {}", sim);
@@ -81,7 +81,7 @@ public class SimService {
             return sim;
         }else{
             //si no existe regreso un null a falta de tener excepciones implementadas
-            log.info("Sim update null, not exist sim in bdd");
+            log.info("Sim update error, not exist sim in bdd");
             throw new NotFoundException("Sim doesn't exist");
         }
     }
