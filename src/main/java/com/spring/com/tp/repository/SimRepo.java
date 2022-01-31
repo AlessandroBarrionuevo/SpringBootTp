@@ -20,6 +20,7 @@ public class SimRepo {
     public void  insertSim(Sim sim){
         log.info("Saving sim: {}", sim);
         simMap.put(sim.getDni(),sim);
+        log.info("Sim saved with succesfull");
     }
 
     public List<Sim> getAllSims(){
@@ -36,12 +37,18 @@ public class SimRepo {
 
     public Boolean updateSim(Sim sim, Sim simOldValue){
         log.info("Sim to Update: {}", sim);
-        return  simMap.replace(sim.getDni(), simOldValue, sim);
+        Boolean update = simMap.replace(sim.getDni(), simOldValue, sim);
+        if (update){
+            log.info("Sim updated");
+        }else log.info("Error, sim not updated");
+
+        return  update;
     }
 
     public String deleteById(Sim sim){
         log.info("Deleting Sim: {}", sim);
         simMap.remove(sim.getDni());
+        log.info("Deleted Sim: {}", sim);
         return "Usuario eliminado";
     }
 
