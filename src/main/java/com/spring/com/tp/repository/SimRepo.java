@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Getter
 @Component
 public class SimRepo {
-    private Map<String, Sim> simMap = new HashMap<String, Sim>();
+    private Map<Integer, Sim> simMap = new HashMap<Integer, Sim>();
 
     public void  insertSim(Sim sim){
         log.info("Saving sim: {}", sim);
@@ -29,7 +29,7 @@ public class SimRepo {
         return listOfSims;
     }
 
-    public Sim getSimById(String id){
+    public Sim getSimById(Integer id){
         Sim sim = simMap.get(id);
         log.info("Returning sim: {}", sim);
         return sim;

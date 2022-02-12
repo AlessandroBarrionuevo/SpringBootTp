@@ -6,6 +6,7 @@ import com.spring.com.tp.model.Book;
 import com.spring.com.tp.model.Movie;
 import com.spring.com.tp.model.Sim;
 import com.spring.com.tp.repository.SimRepo;
+import com.spring.com.tp.repository.SimsRepository;
 import com.spring.com.tp.services.Utils.DateTransformer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +17,20 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Slf4j
 @Service
 public class SimService {
-    private SimRepo simRepo;
-    private BookService bookService;
-    private MovieService movieService;
-
+    private final BookService bookService;
+    private final MovieService movieService;
+    private final SimsRepository simsRepository;
 
     @Autowired
-    public SimService(SimRepo simRepo, BookService bookService, MovieService movieService){
-        this.simRepo = simRepo;
+    public SimService(SimRepo simRepo, BookService bookService, MovieService movieService, SimsRepository simsRepository ){
         this.bookService = bookService;
         this.movieService = movieService;
+        this.simsRepository = simsRepository;
     }
 
     public Sim createSim(SimInput simInput){
@@ -44,17 +45,17 @@ public class SimService {
                 simMovies,
                 simBook
         );
-        simRepo.insertSim(sim);
+        simsRepository.save(sim);
+        //simRepo.insertSim(sim);
         log.info("Created Sim: {}", sim);
         log.info("Sim BDAY: {}", simInput.getBirthDay());
         return sim;
     }
 
-
-    public Sim getSimById(String id){
+    public Optional<Sim> getSimById(Integer id){
         log.info("Request to get sim with id: {}", id);
-        Sim sim = this.simRepo.getSimById(id);
-        if ( sim == null){
+        Optional<Sim> sim = this.simsRepository.findById(id);
+        if ( !sim.isPresent()){
             log.info("Service response for get sim: Sim not Found");
             throw new NotFoundException("Sim not fund");
         } else {
@@ -64,7 +65,7 @@ public class SimService {
     }
 
     public List<Sim> getAllSims(){
-        List<Sim> listOfSims = this.simRepo.getAllSims();
+        List<Sim> listOfSims = this.simsRepository.findAll();
         if(listOfSims.isEmpty()){
             log.info("Service response for all sims: NotFundException, does not exist sims");
             throw new NotFoundException("Sims are empty");
@@ -76,10 +77,10 @@ public class SimService {
 
 
     public Sim updateSim(Sim sim){
-        Sim simOldValue = this.simRepo.getSimById(sim.getDni());
-        if (Objects.equals(sim.getDni(), simOldValue.getDni())){
+        Optional<Sim> simOldValue = this.simsRepository.findById(sim.getDni());
+        if (simOldValue.isPresent()){
             log.info("Existing Sim: {}", simOldValue);
-            simRepo.updateSim(sim, simOldValue);
+            this.simsRepository.save(sim);
             log.info("Sim updated: {}", sim);
             return sim;
         }else{
@@ -88,11 +89,11 @@ public class SimService {
         }
     }
 
-    public String deleteSimById(String id){
+    public String deleteSimById(Integer id){
         log.info("Delete sim with id: {}", id);
-        Sim simToDelete = this.getSimById(id);
-        if (simToDelete != null){
-            simRepo.deleteById(simToDelete);
+        Optional<Sim> simToDelete = this.simsRepository.findById(id);
+        if (simToDelete.isPresent()){
+            this.simsRepository.deleteById(id);
             log.info("successfully removed");
             return "Sim eliminado con exito";
         }else{

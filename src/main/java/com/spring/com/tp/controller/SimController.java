@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -30,9 +32,9 @@ public class SimController {
     }
 
     @GetMapping(path = "/sims/{id}")
-    public ResponseEntity<Sim> getSim(@PathVariable String id){
+    public ResponseEntity<Optional<Sim> > getSim(@PathVariable Integer id){
         log.info("Get method recive petition for Sim whith ID: {}", id);
-        Sim sim = this.simService.getSimById(id);
+        Optional<Sim> sim = this.simService.getSimById(id);
         log.info("Giving back Sim: {}", sim);
         return ResponseEntity.ok(sim);
     }
@@ -52,7 +54,7 @@ public class SimController {
     }
 
     @DeleteMapping(path = "/sims/{id}")
-    public ResponseEntity<String> deleteSim(@PathVariable String id){
+    public ResponseEntity<String> deleteSim(@PathVariable Integer id){
         log.info("Deleting sim whit id: {}", id);
         String deleteMsj = this.simService.deleteSimById(id);
         log.info("Request response: {}", deleteMsj);

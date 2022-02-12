@@ -28,8 +28,7 @@ public class BookService {
                 volumeInfo.getAuthors().get(0),
                 volumeInfo.getPublisher(),
                 volumeInfo.getCategories().get(0),
-                volumeInfo.getPublishedDate(),
-                volumeInfo.getInfoLink()
+                volumeInfo.getPublishedDate()
         );
         log.info("Created Book: {}", book);
         return book;
