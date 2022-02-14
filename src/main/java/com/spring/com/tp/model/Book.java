@@ -20,12 +20,12 @@ public class Book {
 
 
 
-    public Book(String isbn, String title, String s, String publisher, String s1, String publishedDate) {
+    public Book(String isbn, String title, String author, String publisher, String category, String publishedDate) {
         this.isbn = isbn;
         this.title = title;
-        this.author = s;
+        this.author = author;
         this.publisher = publisher;
-        this.category = s1;
+        this.category = category;
         this.publishedDate = publishedDate;
     }
 }
