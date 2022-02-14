@@ -29,7 +29,3 @@ public class Sim {
     @JoinColumn(name = "book_isbn")
     private Book book;
 }
-
-
-
-//https://www.youtube.com/watch?v=2fvUrpYG95w
