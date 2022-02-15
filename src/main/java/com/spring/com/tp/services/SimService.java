@@ -11,6 +11,7 @@ import com.spring.com.tp.services.Utils.DateTransformer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -46,22 +47,15 @@ public class SimService {
                 simBook
         );
         simsRepository.save(sim);
-        //simRepo.insertSim(sim);
         log.info("Created Sim: {}", sim);
-        log.info("Sim BDAY: {}", simInput.getBirthDay());
         return sim;
     }
 
     public Optional<Sim> getSimById(Integer id){
         log.info("Request to get sim with id: {}", id);
         Optional<Sim> sim = this.simsRepository.findById(id);
-        if ( !sim.isPresent()){
-            log.info("Service response for get sim: Sim not Found");
-            throw new NotFoundException("Sim not fund");
-        } else {
-            log.info("Service response for get sim: {}", sim);
-            return sim;
-        }
+        log.info("Service response for get sim: {}", sim);
+        return Optional.ofNullable(sim.orElseThrow(() -> new NotFoundException("Sim not fund")));
     }
 
     public List<Sim> getAllSims(){
@@ -78,28 +72,14 @@ public class SimService {
 
     public Sim updateSim(Sim sim){
         Optional<Sim> simOldValue = this.simsRepository.findById(sim.getDni());
-        if (simOldValue.isPresent()){
-            log.info("Existing Sim: {}", simOldValue);
-            this.simsRepository.save(sim);
-            log.info("Sim updated: {}", sim);
-            return sim;
-        }else{
-            log.info("Sim update error, not exist sim in bdd");
-            throw new NotFoundException("Sim doesn't exist");
-        }
+        log.info("Sim updated: {}", sim);
+        return simOldValue.orElseThrow(() -> new NotFoundException("Sim doesn't exist so you can't update them"));
     }
 
-    public String deleteSimById(Integer id){
+    public void deleteSimById(Integer id){
         log.info("Delete sim with id: {}", id);
         Optional<Sim> simToDelete = this.simsRepository.findById(id);
-        if (simToDelete.isPresent()){
-            this.simsRepository.deleteById(id);
-            log.info("successfully removed");
-            return "Sim eliminado con exito";
-        }else{
-            log.info("Error. can't remove sim id : {},because does not exist", id);
-            throw new BadRequestException("Error. can't remove sim id " + id + " because does not exist" + id);
-        }
+        simToDelete.orElseThrow(() -> new BadRequestException("Error. can't remove sim id " + id + " because does not exist"));
     }
 
 }

@@ -56,9 +56,8 @@ public class SimController {
     @DeleteMapping(path = "/sims/{id}")
     public ResponseEntity<String> deleteSim(@PathVariable Integer id){
         log.info("Deleting sim whit id: {}", id);
-        String deleteMsj = this.simService.deleteSimById(id);
-        log.info("Request response: {}", deleteMsj);
-        return ResponseEntity.ok(deleteMsj);
+        this.simService.deleteSimById(id);
+        return ResponseEntity.ok("Sim Deleted");
     }
 
 
