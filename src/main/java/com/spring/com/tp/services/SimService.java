@@ -79,7 +79,7 @@ public class SimService {
     public void deleteSimById(Integer id){
         log.info("Delete sim with id: {}", id);
         Optional<Sim> simToDelete = this.simsRepository.findById(id);
-        simToDelete.orElseThrow(() -> new BadRequestException("Error. can't remove sim id " + id + " because does not exist"));
+        simToDelete.orElseThrow(() -> new BadRequestException("Error. Sim: "+ id + " could not deleted" ));
 
     }
 
