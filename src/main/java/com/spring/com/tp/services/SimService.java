@@ -73,7 +73,7 @@ public class SimService {
     public Sim updateSim(Sim sim){
         Optional<Sim> simOldValue = this.simsRepository.findById(sim.getDni());
         log.info("Sim updated: {}", sim);
-        return simOldValue.orElseThrow(() -> new NotFoundException("Sim doesn't exist so you can't update them"));
+        return simOldValue.orElseThrow(() -> new NotFoundException("Sim doesn't exist so you can't update it"));
     }
 
     public void deleteSimById(Integer id){
