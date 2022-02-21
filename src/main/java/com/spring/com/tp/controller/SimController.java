@@ -57,6 +57,7 @@ public class SimController {
     public ResponseEntity<String> deleteSim(@PathVariable Integer id){
         log.info("Deleting sim whit id: {}", id);
         this.simService.deleteSimById(id);
+        log.info("Sim: {}, deleted", id);
         return ResponseEntity.ok("Sim Deleted");
     }
 
