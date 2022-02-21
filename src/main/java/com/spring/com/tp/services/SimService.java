@@ -55,7 +55,7 @@ public class SimService {
         log.info("Request to get sim with id: {}", id);
         Optional<Sim> sim = this.simsRepository.findById(id);
         log.info("Service response for get sim: {}", sim);
-        return Optional.ofNullable(sim.orElseThrow(() -> new NotFoundException("Sim not fund")));
+        return Optional.ofNullable(sim.orElseThrow(() -> new NotFoundException("Sim not found")));
     }
 
     public List<Sim> getAllSims(){
@@ -80,7 +80,7 @@ public class SimService {
         log.info("Delete sim with id: {}", id);
         Optional<Sim> simToDelete = this.simsRepository.findById(id);
         simToDelete.orElseThrow(() -> new BadRequestException("Error. can't remove sim id " + id + " because does not exist"));
-        
+
     }
 
 }
