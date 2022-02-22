@@ -28,7 +28,7 @@ public class SimService {
     private final SimsRepository simsRepository;
 
     @Autowired
-    public SimService(SimRepo simRepo, BookService bookService, MovieService movieService, SimsRepository simsRepository ){
+    public SimService(BookService bookService, MovieService movieService, SimsRepository simsRepository ){
         this.bookService = bookService;
         this.movieService = movieService;
         this.simsRepository = simsRepository;
@@ -46,9 +46,8 @@ public class SimService {
                 simMovies,
                 simBook
         );
-        simsRepository.save(sim);
         log.info("Created Sim: {}", sim);
-        return sim;
+        return simsRepository.save(sim);
     }
 
     public Optional<Sim> getSimById(Integer id){
@@ -69,7 +68,6 @@ public class SimService {
         }
     }
 
-
     public Sim updateSim(Sim sim){
         Optional<Sim> simOldValue = this.simsRepository.findById(sim.getDni());
         log.info("Sim updated: {}", sim);
@@ -80,7 +78,5 @@ public class SimService {
         log.info("Delete sim with id: {}", id);
         Optional<Sim> simToDelete = this.simsRepository.findById(id);
         simToDelete.orElseThrow(() -> new BadRequestException("Error. Sim: "+ id + " could not deleted" ));
-
     }
-
 }

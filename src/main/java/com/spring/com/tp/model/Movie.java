@@ -21,7 +21,7 @@ public class Movie {
     private Long runningTimeInMinutes;
     private String titleType;
 
-    public Movie(String title, Long seriesStartYear, Long seriesEndYear, int numberOfEpisodes, Long runningTimeInMinutes, String titleType) {
+    public Movie( String title, Long seriesStartYear, Long seriesEndYear, int numberOfEpisodes, Long runningTimeInMinutes, String titleType) {
         this.name = title;
         this.seriesStartYear = seriesStartYear;
         this.seriesEndYear = seriesEndYear;
