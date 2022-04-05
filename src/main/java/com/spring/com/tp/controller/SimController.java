@@ -1,4 +1,5 @@
 package com.spring.com.tp.controller;
+import com.spring.com.tp.config.exception.NotFoundException;
 import com.spring.com.tp.controller.dto.SimInput;
 import com.spring.com.tp.controller.dto.SimOutput;
 import com.spring.com.tp.model.Sim;
@@ -23,7 +24,7 @@ public class SimController {
     }
 
     @PostMapping(path = "/sims")
-        public ResponseEntity<SimOutput> createPerson(@RequestBody SimInput simInput){
+        public ResponseEntity<SimOutput> createSim(@RequestBody SimInput simInput){
         log.info("PostMethod recive SimInput: {} ", simInput);
         Sim sim = this.simService.createSim(simInput);
         SimOutput simOutput = new SimOutput(sim.getName(),sim.getMovies(), sim.getBook());
@@ -32,11 +33,11 @@ public class SimController {
     }
 
     @GetMapping(path = "/sims/{id}")
-    public ResponseEntity<Optional<Sim> > getSim(@PathVariable Integer id){
+    public ResponseEntity<Sim> getSim(@PathVariable String id){
         log.info("Get method recive petition for Sim whith ID: {}", id);
         Optional<Sim> sim = this.simService.getSimById(id);
         log.info("Giving back Sim: {}", sim);
-        return ResponseEntity.ok(sim);
+        return ResponseEntity.ok(sim.get());
     }
 
     @GetMapping(path = "/sims")
@@ -54,11 +55,11 @@ public class SimController {
     }
 
     @DeleteMapping(path = "/sims/{id}")
-    public ResponseEntity<String> deleteSim(@PathVariable Integer id){
+    public ResponseEntity<String> deleteSim(@PathVariable String id){
         log.info("Deleting sim whit id: {}", id);
         this.simService.deleteSimById(id);
         log.info("Sim: {} deleted", id);
-        return ResponseEntity.ok("Sim Deleted");
+        return ResponseEntity.ok("Sim : "+ id +"Deleted");
     }
 
 

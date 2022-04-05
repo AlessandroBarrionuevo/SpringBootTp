@@ -50,7 +50,7 @@ public class SimService {
         return simsRepository.save(sim);
     }
 
-    public Optional<Sim> getSimById(Integer id){
+    public Optional<Sim> getSimById(String id){
         log.info("Request to get sim with id: {}", id);
         Optional<Sim> sim = this.simsRepository.findById(id);
         log.info("Service response for get sim: {}", sim);
@@ -74,7 +74,7 @@ public class SimService {
         return simOldValue.orElseThrow(() -> new NotFoundException("Sim doesn't exist so you can't update it"));
     }
 
-    public void deleteSimById(Integer id){
+    public void deleteSimById(String id){
         log.info("Delete sim with id: {}", id);
         Optional<Sim> simToDelete = this.simsRepository.findById(id);
         simToDelete.orElseThrow(() -> new BadRequestException("Error. Sim: "+ id + " could not deleted" ));

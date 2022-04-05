@@ -17,7 +17,7 @@ public class Sim {
     private String name;
 
     @Id
-    private Integer dni;
+    private String dni;
 
     private LocalDate birthDay;
 

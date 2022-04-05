@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface SimsRepository extends JpaRepository<Sim, Integer> {
+public interface SimsRepository extends JpaRepository<Sim, String> {
 
 }

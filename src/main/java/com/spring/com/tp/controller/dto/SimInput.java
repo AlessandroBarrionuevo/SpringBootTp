@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 public class SimInput {
     private String name;
-    private Integer dni;
+    private String dni;
     private String birthDay;
     private List<String> moviesName;
     private String isbn;
