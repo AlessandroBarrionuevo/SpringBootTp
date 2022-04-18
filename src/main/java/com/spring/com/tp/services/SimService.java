@@ -37,24 +37,25 @@ public class SimService {
     public Sim createSim(SimInput simInput){
         log.info("Sim to create: {}", simInput);
         DateTransformer dateTransformer = new DateTransformer();
-        Book simBook = this.bookService.createBook(simInput.getIsbn());
+        List<Book> simBooks = this.bookService.listOfBooks(simInput.getListOfIsbn());
         List<Movie> simMovies = this.movieService.createMovieList(simInput.getMoviesName());
         Sim sim = new Sim(
                 simInput.getName(),
                 simInput.getDni(),
                 dateTransformer.formaterDate(simInput.getBirthDay()),
                 simMovies,
-                simBook
+                simBooks
         );
         log.info("Created Sim: {}", sim);
         return simsRepository.save(sim);
     }
 
-    public Optional<Sim> getSimById(String id){
+    public Sim getSimById(String id){
         log.info("Request to get sim with id: {}", id);
         Optional<Sim> sim = this.simsRepository.findById(id);
+        sim.orElseThrow(() -> new NotFoundException("Sim id: "+ id + " not found"));
         log.info("Service response for get sim: {}", sim);
-        return Optional.ofNullable(sim.orElseThrow(() -> new NotFoundException("Sim not found")));
+        return sim.get();
     }
 
     public List<Sim> getAllSims(){

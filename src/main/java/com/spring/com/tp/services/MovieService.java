@@ -8,14 +8,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
 @Service
 public class MovieService {
-    private MovieClient movieClient;
+    private final MovieClient movieClient;
+
 
     @Autowired
     public MovieService(MovieClient movieClient){
@@ -25,7 +25,7 @@ public class MovieService {
 
     public Movie createMovie(String movieName){
         log.info("Creating movie with name: {}", movieName);
-        MovieResponse movieResponse = this.movieClient.getMovie(movieName);
+        MovieResponse movieResponse = this.movieClient.getMovie(movieName.replace(" ", ""));
         Result results = movieResponse.getResults().get(0);
         Movie movie = new Movie(
                 results.getTitle(),
@@ -41,8 +41,7 @@ public class MovieService {
 
     public List<Movie> createMovieList(List<String> movieNames){
         log.info("list Of movies names: {}", movieNames);
-
-        List<Movie> myMovies =  movieNames.stream().map((movie) -> this.createMovie(movie)).collect(Collectors.toList());
+        List<Movie> myMovies =  movieNames.stream().map(this::createMovie).collect(Collectors.toList());
         log.info("Created Movies: {}", myMovies);
         return myMovies;
     }

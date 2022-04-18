@@ -14,5 +14,5 @@ import java.util.List;
 public class SimOutput {
     private String name;
     private List<Movie> movies;
-    private Book book;
+    private List<Book> simBooks;
 }

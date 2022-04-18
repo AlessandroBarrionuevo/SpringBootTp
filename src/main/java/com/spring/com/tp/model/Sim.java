@@ -25,7 +25,11 @@ public class Sim {
     @JoinColumn(name = "sim_id")
     private List<Movie> movies;
 
-    @OneToOne( cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "book_isbn")
-    private Book book;
+    @ManyToMany( cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "sim_book",
+            joinColumns = { @JoinColumn(name = "sim_id")},
+            inverseJoinColumns = { @JoinColumn(name = "book_id")}
+    )
+    private List<Book> books;
 }

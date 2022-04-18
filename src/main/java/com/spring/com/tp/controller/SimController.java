@@ -27,7 +27,7 @@ public class SimController {
         public ResponseEntity<SimOutput> createSim(@RequestBody SimInput simInput){
         log.info("PostMethod recive SimInput: {} ", simInput);
         Sim sim = this.simService.createSim(simInput);
-        SimOutput simOutput = new SimOutput(sim.getName(),sim.getMovies(), sim.getBook());
+        SimOutput simOutput = new SimOutput(sim.getName(),sim.getMovies(), sim.getBooks());
         log.info("Created Sim: {}", simOutput);
         return ResponseEntity.ok(simOutput);
     }
@@ -35,9 +35,9 @@ public class SimController {
     @GetMapping(path = "/sims/{id}")
     public ResponseEntity<Sim> getSim(@PathVariable String id){
         log.info("Get method recive petition for Sim whith ID: {}", id);
-        Optional<Sim> sim = this.simService.getSimById(id);
+        Sim sim = this.simService.getSimById(id);
         log.info("Giving back Sim: {}", sim);
-        return ResponseEntity.ok(sim.get());
+        return ResponseEntity.ok(sim);
     }
 
     @GetMapping(path = "/sims")
