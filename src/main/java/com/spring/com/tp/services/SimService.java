@@ -71,9 +71,10 @@ public class SimService {
     }
 
     public Sim updateSim(Sim sim){
-        this.simsRepository.save(sim);
+        Optional<Sim> simToUpdate = this.simsRepository.findById(sim.getDni());
+        simToUpdate.ifPresent(s -> this.simsRepository.save(sim));
         log.info("Sim updated: {}", sim);
-        return sim;
+        return simToUpdate.orElseThrow(() -> new NotFoundException("Sim doesn't exist, to create sim use post method."));
     }
 
     public void deleteSimById(String id){
