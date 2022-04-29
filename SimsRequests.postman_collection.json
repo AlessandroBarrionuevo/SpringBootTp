@@ -107,7 +107,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Ale\",\r\n    \"dni\": \"a123xx\",\r\n    \"birthDay\": \"1998-01-21\",\r\n    \"movies\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"Arrow\",\r\n            \"seriesStartYear\": 2012,\r\n            \"seriesEndYear\": 2019,\r\n            \"numberOfEpisodes\": 100,\r\n            \"runningTimeInMinutes\": 42,\r\n            \"titleType\": \"tvSeries\"\r\n        }\r\n    ],\r\n    \"book\": {\r\n        \"isbn\": \"9780007103072\",\r\n        \"title\": \"HOLY BIBLE: King James Version (KJV) Popular Gift and Award Black Leatherette Edition\",\r\n        \"author\": \"Harpercollins Uk\",\r\n        \"publisher\": \"Harpercollins Pub Limited\",\r\n        \"category\": \"Bibles\",\r\n        \"publishedDate\": \"2001\"\r\n    }\r\n}",
+					"raw": "{\r\n    \"name\": \"Ale\",\r\n    \"dni\": \"a123xx\",\r\n    \"birthDay\": \"1998-01-21\",\r\n    \"movies\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"Arrow\",\r\n            \"seriesStartYear\": 2012,\r\n            \"seriesEndYear\": 2019,\r\n            \"numberOfEpisodes\": 100,\r\n            \"runningTimeInMinutes\": 42,\r\n            \"titleType\": \"tvSeries\"\r\n        }\r\n    ],\r\n    \"books\": [{\r\n            \"isbn\": \"9788472095328\",\r\n            \"title\": \"LA FATAL ARROGANCIA\",\r\n            \"author\": \"Friedrich A. von Hayek\",\r\n            \"publisher\": null,\r\n            \"category\": \"Education\",\r\n            \"publishedDate\": \"2010-12-01\"\r\n        }]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

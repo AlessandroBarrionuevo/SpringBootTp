@@ -36,6 +36,7 @@ public class BookService {
                 volumeInfo.getCategories().get(0),
                 volumeInfo.getPublishedDate()
         );
+        this.booksRepository.save(book);
         log.info("Created Book: {}", book);
         return book;
     }
