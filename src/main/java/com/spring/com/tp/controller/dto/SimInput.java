@@ -1,4 +1,5 @@
 package com.spring.com.tp.controller.dto;
+import com.spring.com.tp.model.Strategy.ProfesionesEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,4 +14,6 @@ public class SimInput {
     private String birthDay;
     private List<String> moviesName;
     private List<String> listOfIsbn;
+    private ProfesionesEnum profesion;
+    private Double dinero;
 }

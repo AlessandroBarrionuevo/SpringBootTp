@@ -1,5 +1,6 @@
 package com.spring.com.tp.model;
 
+import com.spring.com.tp.model.Strategy.ProfesionesEnum;
 import lombok.*;
 
 import javax.persistence.*;
@@ -32,4 +33,6 @@ public class Sim {
             inverseJoinColumns = { @JoinColumn(name = "book_id")}
     )
     private List<Book> books;
+    private ProfesionesEnum tipoProfesion;
+    private Double dinero;
 }

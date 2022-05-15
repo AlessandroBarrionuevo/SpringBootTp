@@ -16,7 +16,7 @@ import java.util.Optional;
 @Slf4j
 @RestController
 public class SimController {
-    private SimService simService;
+    private final SimService simService;
 
     @Autowired
     public SimController(SimService simService){
@@ -62,5 +62,16 @@ public class SimController {
         return ResponseEntity.ok("Sim : "+ id +"Deleted");
     }
 
+
+    @GetMapping(path = "/sims/{id}/rutina-de-trabajo")
+    public ResponseEntity<Sim> trabajar(@PathVariable String id){
+        log.info("Searching sim whith id: {}", id);
+        Sim sim = this.simService.getSimById(id);
+        log.info("Sim id: {} working", sim.getDni());
+        sim = this.simService.trabajarSim(sim);
+        log.info("Sim money: {}", sim.getDinero());
+        return ResponseEntity.ok(sim);
+
+    }
 
 }

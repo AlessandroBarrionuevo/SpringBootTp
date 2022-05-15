@@ -5,6 +5,8 @@ import com.spring.com.tp.controller.dto.SimInput;
 import com.spring.com.tp.model.Book;
 import com.spring.com.tp.model.Movie;
 import com.spring.com.tp.model.Sim;
+import com.spring.com.tp.model.Strategy.ProfesionesEnum;
+import com.spring.com.tp.model.Strategy.ProfesionesStrategy;
 import com.spring.com.tp.repository.SimRepo;
 import com.spring.com.tp.repository.SimsRepository;
 import com.spring.com.tp.services.Utils.DateTransformer;
@@ -27,12 +29,14 @@ public class SimService {
     private final BookService bookService;
     private final MovieService movieService;
     private final SimsRepository simsRepository;
+    private ProfesionesStrategy profesionesStrategy;
 
     @Autowired
-    public SimService(BookService bookService, MovieService movieService, SimsRepository simsRepository ){
+    public SimService(BookService bookService, MovieService movieService, SimsRepository simsRepository, ProfesionesStrategy profesionesStrategy ){
         this.bookService = bookService;
         this.movieService = movieService;
         this.simsRepository = simsRepository;
+        this.profesionesStrategy = profesionesStrategy;
     }
 
     public Sim createSim(SimInput simInput){
@@ -45,7 +49,9 @@ public class SimService {
                 simInput.getDni(),
                 dateTransformer.formaterDate(simInput.getBirthDay()),
                 simMovies,
-                simBooks
+                simBooks,
+                simInput.getProfesion(),
+                this.verificarDinero(simInput.getDinero())
         );
         log.info("Created Sim: {}", sim);
         return simsRepository.save(sim);
@@ -83,4 +89,19 @@ public class SimService {
         simToDelete.ifPresent(sim -> this.simsRepository.deleteById(sim.getDni()));
         simToDelete.orElseThrow(() -> new BadRequestException("Error. Sim: "+ id + " could not deleted" ));
     }
+
+    public Sim trabajarSim(Sim sim){
+        log.info("Sim trabajando");
+        sim.setDinero(sim.getDinero() + this.profesionesStrategy.trabajar(sim.getTipoProfesion()));
+        log.info("Sim working of: {}",sim.getTipoProfesion());
+        log.info("Sim money: {}",sim.getDinero());
+        return sim;
+    }
+
+    public Double verificarDinero(Double dineroSim){
+        if(dineroSim == null || dineroSim < 0){
+            return 100.00;
+        }else return dineroSim;
+    }
+
 }
