@@ -1,19 +1,35 @@
 package com.spring.com.tp.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@Entity
 public class Sim {
+
     private String name;
+
+    @Id
     private String dni;
+
     private LocalDate birthDay;
+
+    @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "sim_id")
     private List<Movie> movies;
-    private Book book;
+
+    @ManyToMany( cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "sim_book",
+            joinColumns = { @JoinColumn(name = "sim_id")},
+            inverseJoinColumns = { @JoinColumn(name = "book_id")}
+    )
+    private List<Book> books;
 }

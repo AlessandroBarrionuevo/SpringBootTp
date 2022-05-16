@@ -29,7 +29,7 @@ public class SimRepo {
         return listOfSims;
     }
 
-    public Sim getSimById(String id){
+    public Sim getSimById(Integer id){
         Sim sim = simMap.get(id);
         log.info("Returning sim: {}", sim);
         return sim;

@@ -1,0 +1,161 @@
+{
+	"info": {
+		"_postman_id": "a917bf3a-d7cb-453c-9318-cc03d868c54c",
+		"name": "SimsRequests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "sim1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Sabrina\",\r\n    \"dni\":\"a41665129b\",\r\n    \"birthDay\":\"1998/12/14\",\r\n    \"moviesName\":[\r\n        \"big bang theory\", \"breaking bad\"\r\n    ],\r\n    \"listOfIsbn\":[\r\n        \"9780007103072\", \"9786070709548\", \"9788472095328\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/sims",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sims"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sim2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"fdsh\",\r\n    \"dni\":\"a123xx\",\r\n    \"birthDay\":\"1999/01/21\",\r\n    \"moviesName\":[\r\n        \"gotham\", \"lie to me\"\r\n    ],\r\n    \"listOfIsbn\":[\r\n        \"9780007103072\", \"9786070709548\", \"9788472095328\"\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/sims",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sims"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getbyidSim2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/sims/a123xx",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sims",
+						"a123xx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/sims",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sims"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateSim2",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Ale\",\r\n    \"dni\": \"a123xx\",\r\n    \"birthDay\": \"1998-01-21\",\r\n    \"movies\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"Arrow\",\r\n            \"seriesStartYear\": 2012,\r\n            \"seriesEndYear\": 2019,\r\n            \"numberOfEpisodes\": 100,\r\n            \"runningTimeInMinutes\": 42,\r\n            \"titleType\": \"tvSeries\"\r\n        }\r\n    ],\r\n    \"books\": [{\r\n            \"isbn\": \"9788472095328\",\r\n            \"title\": \"LA FATAL ARROGANCIA\",\r\n            \"author\": \"Friedrich A. von Hayek\",\r\n            \"publisher\": null,\r\n            \"category\": \"Education\",\r\n            \"publishedDate\": \"2010-12-01\"\r\n        }]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/sims",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sims"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteSim2",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/sims/a123xx",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sims",
+						"a123xx"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

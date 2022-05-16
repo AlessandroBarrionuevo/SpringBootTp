@@ -12,5 +12,5 @@ public class SimInput {
     private String dni;
     private String birthDay;
     private List<String> moviesName;
-    private String isbn;
+    private List<String> listOfIsbn;
 }

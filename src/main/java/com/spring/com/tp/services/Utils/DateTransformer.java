@@ -11,9 +11,9 @@ public class DateTransformer {
 
     public LocalDate formaterDate(String dateToTransform){
         log.info("transforming date format: {}", dateToTransform);
-        DateTimeFormatter esDateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter esDateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         if (dateToTransform.contains("-")){
-            esDateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            esDateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         }
         LocalDate simBday = LocalDate.parse(dateToTransform, esDateFormat);
         log.info("Date format transformated: {}", simBday);
