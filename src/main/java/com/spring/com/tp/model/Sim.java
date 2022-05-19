@@ -33,6 +33,8 @@ public class Sim {
             inverseJoinColumns = { @JoinColumn(name = "book_id")}
     )
     private List<Book> books;
+
+    @Enumerated(value = EnumType.STRING)
     private ProfesionesEnum tipoProfesion;
     private Double dinero;
 }
