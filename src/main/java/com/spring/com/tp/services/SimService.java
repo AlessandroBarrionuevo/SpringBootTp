@@ -22,13 +22,18 @@ public class SimService {
     private final MovieService movieService;
     private final SimsRepository simsRepository;
     private ProfesionesStrategy profesionesStrategy;
+    private TrabajarService trabajarService;
 
     @Autowired
-    public SimService(BookService bookService, MovieService movieService, SimsRepository simsRepository, ProfesionesStrategy profesionesStrategy ){
+    public SimService(BookService bookService, MovieService movieService,
+                      SimsRepository simsRepository, ProfesionesStrategy profesionesStrategy,
+                      TrabajarService trabajarService
+    ){
         this.bookService = bookService;
         this.movieService = movieService;
         this.simsRepository = simsRepository;
         this.profesionesStrategy = profesionesStrategy;
+        this.trabajarService = trabajarService;
     }
 
     public Sim createSim(SimInput simInput){
@@ -43,7 +48,7 @@ public class SimService {
                 simMovies,
                 simBooks,
                 simInput.getProfesion(),
-                this.verificarDinero(simInput.getDinero())
+                trabajarService.verificarDinero(simInput.getDinero())
         );
         log.info("Created Sim: {}", sim);
         return simsRepository.save(sim);
@@ -82,18 +87,6 @@ public class SimService {
         simToDelete.orElseThrow(() -> new BadRequestException("Error. Sim: "+ id + " could not deleted" ));
     }
 
-    public Sim trabajarSim(Sim sim){
-        log.info("Sim trabajando");
-        sim.setDinero(sim.getDinero() + this.profesionesStrategy.trabajar(sim.getTipoProfesion()));
-        log.info("Sim working of: {}",sim.getTipoProfesion());
-        log.info("Sim money: {}",sim.getDinero());
-        return sim;
-    }
 
-    public Double verificarDinero(Double dineroSim){
-        if(dineroSim == null || dineroSim < 0){
-            return 100.00;
-        }else return dineroSim;
-    }
 
 }

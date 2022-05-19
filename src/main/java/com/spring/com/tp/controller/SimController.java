@@ -4,6 +4,7 @@ import com.spring.com.tp.controller.dto.SimInput;
 import com.spring.com.tp.controller.dto.SimOutput;
 import com.spring.com.tp.model.Sim;
 import com.spring.com.tp.services.SimService;
+import com.spring.com.tp.services.TrabajarService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +18,12 @@ import java.util.Optional;
 @RestController
 public class SimController {
     private final SimService simService;
+    private final TrabajarService trabajarService;
 
     @Autowired
-    public SimController(SimService simService){
+    public SimController(SimService simService, TrabajarService trabajarService){
       this.simService = simService;
+      this.trabajarService = trabajarService;
     }
 
     @PostMapping(path = "/sims")
@@ -68,7 +71,7 @@ public class SimController {
         log.info("Searching sim whith id: {}", id);
         Sim sim = this.simService.getSimById(id);
         log.info("Sim id: {} working", sim.getDni());
-        sim = this.simService.trabajarSim(sim);
+        sim = this.trabajarService.trabajarSim(sim);
         log.info("Sim money: {}", sim.getDinero());
         return ResponseEntity.ok(sim);
 
