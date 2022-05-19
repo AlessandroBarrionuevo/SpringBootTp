@@ -1,6 +1,4 @@
-package com.spring.com.tp.model.Strategy.Profesiones;
-
-import com.spring.com.tp.model.Strategy.Profesiones.Profesiones;
+package com.spring.com.tp.services.StrategyClasses.Profesiones;
 
 public class Policia extends Profesiones {
 

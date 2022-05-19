@@ -1,4 +1,4 @@
-package com.spring.com.tp.model.Strategy.Profesiones;
+package com.spring.com.tp.services.StrategyClasses.Profesiones;
 
 import com.spring.com.tp.model.Sim;
 

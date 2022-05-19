@@ -1,9 +1,10 @@
-package com.spring.com.tp.model.Strategy;
+package com.spring.com.tp.services.StrategyClasses;
 
-import com.spring.com.tp.model.Strategy.Profesiones.Ingeniero;
-import com.spring.com.tp.model.Strategy.Profesiones.Medico;
-import com.spring.com.tp.model.Strategy.Profesiones.Policia;
-import com.spring.com.tp.model.Strategy.Profesiones.Profesiones;
+import com.spring.com.tp.model.Strategy.ProfesionesEnum;
+import com.spring.com.tp.services.StrategyClasses.Profesiones.Ingeniero;
+import com.spring.com.tp.services.StrategyClasses.Profesiones.Medico;
+import com.spring.com.tp.services.StrategyClasses.Profesiones.Policia;
+import com.spring.com.tp.services.StrategyClasses.Profesiones.Profesiones;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;

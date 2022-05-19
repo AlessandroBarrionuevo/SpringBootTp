@@ -5,23 +5,15 @@ import com.spring.com.tp.controller.dto.SimInput;
 import com.spring.com.tp.model.Book;
 import com.spring.com.tp.model.Movie;
 import com.spring.com.tp.model.Sim;
-import com.spring.com.tp.model.Strategy.ProfesionesEnum;
-import com.spring.com.tp.model.Strategy.ProfesionesStrategy;
-import com.spring.com.tp.repository.SimRepo;
 import com.spring.com.tp.repository.SimsRepository;
+import com.spring.com.tp.services.StrategyClasses.ProfesionesStrategy;
 import com.spring.com.tp.services.Utils.DateTransformer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
