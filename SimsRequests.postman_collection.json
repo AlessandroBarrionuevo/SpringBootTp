@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Sabrina\",\r\n    \"dni\":\"a41665129b\",\r\n    \"birthDay\":\"1998/12/14\",\r\n    \"moviesName\":[\r\n        \"big bang theory\", \"breaking bad\"\r\n    ],\r\n    \"listOfIsbn\":[\r\n        \"9780007103072\", \"9786070709548\", \"9788472095328\"\r\n    ]\r\n}",
+					"raw": "{\r\n    \"name\":\"Sabrina\",\r\n    \"dni\":\"a41665129b\",\r\n    \"birthDay\":\"1998/12/14\",\r\n    \"moviesName\":[\r\n        \"big bang theory\", \"breaking bad\"\r\n    ],\r\n    \"listOfIsbn\":[\r\n        \"9780007103072\", \"9786070709548\", \"9788472095328\"\r\n    ],\r\n    \"profesion\": \"POLICIA\",\r\n    \"dinero\": 0\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -40,7 +40,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"fdsh\",\r\n    \"dni\":\"a123xx\",\r\n    \"birthDay\":\"1999/01/21\",\r\n    \"moviesName\":[\r\n        \"gotham\", \"lie to me\"\r\n    ],\r\n    \"listOfIsbn\":[\r\n        \"9780007103072\", \"9786070709548\", \"9788472095328\"\r\n    ]\r\n}",
+					"raw": "{\r\n    \"name\":\"fdsh\",\r\n    \"dni\":\"a123xx\",\r\n    \"birthDay\":\"1999/01/21\",\r\n    \"moviesName\":[\r\n        \"gotham\", \"lie to me\"\r\n    ],\r\n    \"listOfIsbn\":[\r\n        \"9780007103072\", \"9786070709548\", \"9788472095328\"\r\n    ],\r\n    \"profesion\": \"MEDICO\",\r\n    \"dinero\": null\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -107,7 +107,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Ale\",\r\n    \"dni\": \"a123xx\",\r\n    \"birthDay\": \"1998-01-21\",\r\n    \"movies\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"Arrow\",\r\n            \"seriesStartYear\": 2012,\r\n            \"seriesEndYear\": 2019,\r\n            \"numberOfEpisodes\": 100,\r\n            \"runningTimeInMinutes\": 42,\r\n            \"titleType\": \"tvSeries\"\r\n        }\r\n    ],\r\n    \"books\": [{\r\n            \"isbn\": \"9788472095328\",\r\n            \"title\": \"LA FATAL ARROGANCIA\",\r\n            \"author\": \"Friedrich A. von Hayek\",\r\n            \"publisher\": null,\r\n            \"category\": \"Education\",\r\n            \"publishedDate\": \"2010-12-01\"\r\n        }]\r\n}",
+					"raw": "{\r\n    \"name\": \"Ale\",\r\n    \"dni\": \"a123xx\",\r\n    \"birthDay\": \"1998-01-21\",\r\n    \"movies\": [\r\n        {\r\n            \"id\": 1,\r\n            \"name\": \"Arrow\",\r\n            \"seriesStartYear\": 2012,\r\n            \"seriesEndYear\": 2019,\r\n            \"numberOfEpisodes\": 100,\r\n            \"runningTimeInMinutes\": 42,\r\n            \"titleType\": \"tvSeries\"\r\n        }\r\n    ],\r\n    \"books\": [{\r\n            \"isbn\": \"9788472095328\",\r\n            \"title\": \"LA FATAL ARROGANCIA\",\r\n            \"author\": \"Friedrich A. von Hayek\",\r\n            \"publisher\": null,\r\n            \"category\": \"Education\",\r\n            \"publishedDate\": \"2010-12-01\"\r\n        }],\r\n    \"tipoProfesion\": \"POLICIA\",\r\n    \"dinero\": 1100\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -152,6 +152,27 @@
 					"path": [
 						"sims",
 						"a123xx"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getRutinaTrabajoSim2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/sims/a123xx/rutina-de-trabajo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"sims",
+						"a123xx",
+						"rutina-de-trabajo"
 					]
 				}
 			},

@@ -5,21 +5,15 @@ import com.spring.com.tp.controller.dto.SimInput;
 import com.spring.com.tp.model.Book;
 import com.spring.com.tp.model.Movie;
 import com.spring.com.tp.model.Sim;
-import com.spring.com.tp.repository.SimRepo;
 import com.spring.com.tp.repository.SimsRepository;
+import com.spring.com.tp.services.StrategyClasses.ProfesionesStrategy;
 import com.spring.com.tp.services.Utils.DateTransformer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -27,12 +21,19 @@ public class SimService {
     private final BookService bookService;
     private final MovieService movieService;
     private final SimsRepository simsRepository;
+    private ProfesionesStrategy profesionesStrategy;
+    private TrabajarService trabajarService;
 
     @Autowired
-    public SimService(BookService bookService, MovieService movieService, SimsRepository simsRepository ){
+    public SimService(BookService bookService, MovieService movieService,
+                      SimsRepository simsRepository, ProfesionesStrategy profesionesStrategy,
+                      TrabajarService trabajarService
+    ){
         this.bookService = bookService;
         this.movieService = movieService;
         this.simsRepository = simsRepository;
+        this.profesionesStrategy = profesionesStrategy;
+        this.trabajarService = trabajarService;
     }
 
     public Sim createSim(SimInput simInput){
@@ -45,7 +46,9 @@ public class SimService {
                 simInput.getDni(),
                 dateTransformer.formaterDate(simInput.getBirthDay()),
                 simMovies,
-                simBooks
+                simBooks,
+                simInput.getProfesion(),
+                trabajarService.verificarDinero(simInput.getDinero())
         );
         log.info("Created Sim: {}", sim);
         return simsRepository.save(sim);
@@ -83,4 +86,7 @@ public class SimService {
         simToDelete.ifPresent(sim -> this.simsRepository.deleteById(sim.getDni()));
         simToDelete.orElseThrow(() -> new BadRequestException("Error. Sim: "+ id + " could not deleted" ));
     }
+
+
+
 }

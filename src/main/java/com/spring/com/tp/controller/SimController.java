@@ -4,6 +4,7 @@ import com.spring.com.tp.controller.dto.SimInput;
 import com.spring.com.tp.controller.dto.SimOutput;
 import com.spring.com.tp.model.Sim;
 import com.spring.com.tp.services.SimService;
+import com.spring.com.tp.services.TrabajarService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +17,13 @@ import java.util.Optional;
 @Slf4j
 @RestController
 public class SimController {
-    private SimService simService;
+    private final SimService simService;
+    private final TrabajarService trabajarService;
 
     @Autowired
-    public SimController(SimService simService){
+    public SimController(SimService simService, TrabajarService trabajarService){
       this.simService = simService;
+      this.trabajarService = trabajarService;
     }
 
     @PostMapping(path = "/sims")
@@ -62,5 +65,16 @@ public class SimController {
         return ResponseEntity.ok("Sim : "+ id +"Deleted");
     }
 
+
+    @GetMapping(path = "/sims/{id}/rutina-de-trabajo")
+    public ResponseEntity<Sim> trabajar(@PathVariable String id){
+        log.info("Searching sim whith id: {}", id);
+        Sim sim = this.simService.getSimById(id);
+        log.info("Sim id: {} working", sim.getDni());
+        sim = this.trabajarService.trabajarSim(sim);
+        log.info("Sim money: {}", sim.getDinero());
+        return ResponseEntity.ok(sim);
+
+    }
 
 }
